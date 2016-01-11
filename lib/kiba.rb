@@ -1,5 +1,6 @@
 # encoding: utf-8
 require 'kiba/version'
+require 'kiba/logger'
 
 require 'kiba/control'
 require 'kiba/context'

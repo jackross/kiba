@@ -14,6 +14,9 @@ Gem::Specification.new do |gem|
   gem.version       = Kiba::VERSION
   gem.executables   = ['kiba']
 
+  gem.add_runtime_dependency 'timers', '4.1'
+  gem.add_runtime_dependency 'i18n'
+
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'minitest'
   gem.add_development_dependency 'awesome_print'
