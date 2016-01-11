@@ -42,7 +42,7 @@ module Kiba
     private
 
     def redis_key_style(klass)
-      klass.name.underscore.gsub(%r{\/}, ':').tr(/_/, '-')
+      klass.name.underscore.gsub(%r{\/}, ':').tr('_', '-')
     end
   end
 end
