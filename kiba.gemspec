@@ -14,6 +14,8 @@ Gem::Specification.new do |gem|
   gem.version       = Kiba::VERSION
   gem.executables   = ['kiba']
 
+  gem.add_runtime_dependency 'parallel'
+  gem.add_runtime_dependency 'ruby-progressbar'
   gem.add_runtime_dependency 'redis'
   gem.add_runtime_dependency 'timers', '4.1'
   gem.add_runtime_dependency 'i18n'
