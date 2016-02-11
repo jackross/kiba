@@ -1,4 +1,5 @@
 require 'parallel'
+require 'securerandom'
 
 module Kiba
   module Runner
@@ -20,7 +21,7 @@ module Kiba
     def process_rows(sources, transforms, destinations)
       sources.each do |source|
         puts "Processing source #{source.class.name}"
-        counter = Kiba::Counter.new(source.class, 0)
+        counter = Kiba::Counter.new(SecureRandom.uuid, 0)
         counter.report :current
         timer  = (ENV['KIBA_TIMER']  || 'true') == 'true'
         timing = (ENV['KIBA_TIMING'] || 2).to_i
