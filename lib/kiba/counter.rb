@@ -4,7 +4,7 @@ module Kiba
 
     def initialize(key = :default, initial_value = 0)
       @started_at = Time.now
-      @key = [redis_key_style(self.class), redis_key_style(key)].join(':')
+      @key = [redis_key_style(self.class.name), redis_key_style(key)].join(':')
       @store = Kiba.redis
       self.count = initial_value
     end
@@ -41,8 +41,8 @@ module Kiba
 
     private
 
-    def redis_key_style(klass)
-      klass.name.underscore.gsub(%r{\/}, ':').tr('_', '-')
+    def redis_key_style(string)
+      string.underscore.gsub(%r{\/}, ':').tr('_', '-')
     end
   end
 end
