@@ -34,7 +34,7 @@ module Kiba
         pop    = ->() { source.pop || Parallel::Stop }
         start  = ->(_, _) { counter.increment! }
         Parallel.each(pop, in_processes: processes_count, start: start) do |row|
-        # Parallel.each(pop, in_processes: processes_count) do |row|
+          # Parallel.each(pop, in_processes: processes_count) do |row|
           transforms.each do |transform|
             # TODO: avoid the case completely by e.g. subclassing Proc
             # and aliasing `process` to `call`. Benchmark needed first though.
