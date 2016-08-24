@@ -14,14 +14,13 @@ module Kiba
   module_function
 
   def redis
-    @redis ||= Redis.new
+    @redis ||= Redis.new(url: ENV['REDIS_URL'])
   end
 
   def timers
     @timers ||= Timers::Group.new
   end
 end
-
 
 Kiba.extend(Kiba::Parser)
 Kiba.extend(Kiba::Runner)
