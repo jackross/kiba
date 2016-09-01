@@ -1,7 +1,5 @@
-# inherit_from:
-#   - .rubocop_todo.yml
-
 AllCops:
+  TargetRubyVersion: 2.3
   Exclude:
     - vendor/**
     - bin/**
@@ -45,4 +43,7 @@ ClassAndModuleChildren:
   # module MDB has already been required/defined.
   #
   # class MDB::Person; end
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
   Enabled: false
