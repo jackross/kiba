@@ -16,10 +16,6 @@ module Kiba
   def redis
     @redis ||= Redis.new(url: ENV['REDIS_URL'])
   end
-
-  def timers
-    @timers ||= Timers::Group.new
-  end
 end
 
 Kiba.extend(Kiba::Parser)

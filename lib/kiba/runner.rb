@@ -23,14 +23,14 @@ module Kiba
         puts "Processing source #{source.class.name}"
         counter = Kiba::Counter.new(SecureRandom.uuid, 0)
         counter.report :current
-        timer  = (ENV['KIBA_TIMER'] || 'true') == 'true'
         timing = (ENV['KIBA_TIMING'] || 2).to_i
-        # timer_thread = Thread.new do
-          if timer
-            Kiba.timers.now_and_every(timing) { counter.report :current }
-            loop { Kiba.timers.wait }
+        timer_thread = Thread.new do
+          if timer?
+            timer = Timers::Group.new
+            timer.now_and_every(timing) { counter.report :current }
+            loop { timer.wait }
           end
-        # end
+        end
         pop    = ->() { source.pop || Parallel::Stop }
         start  = ->(_, _) { counter.increment! }
         Parallel.each(pop, in_processes: processes_count, start: start) do |row|
@@ -51,7 +51,7 @@ module Kiba
           end
         end
         source.close
-        # timer_thread.exit
+        timer_thread.exit
         counter.report :current
       end
     end
@@ -72,6 +72,10 @@ module Kiba
 
     def processes_count
       (ENV['KIBA_PROCESSES'] || 0).to_i
+    end
+
+    def timer?
+      (ENV['KIBA_TIMER'] || 'true') == 'true'
     end
   end
 end
